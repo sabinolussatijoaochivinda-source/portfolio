@@ -3,63 +3,144 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sabino Chivinda</title>
+<title>Sabino Chivinda — Desenvolvedor Frontend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --bg:#0a0e14;
+    --bg-soft:#11161f;
+    --card:#141a24;
+    --border:#232b38;
+    --border-hover:#00c9b1;
+    --text:#e6edf3;
+    --muted:#8b949e;
+    --accent:#00c9b1;
+    --accent-dim:rgba(0,201,177,.12);
+    --accent-2:#7c8cff;
+  }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Segoe UI',sans-serif;background:#0d1117;color:#e6edf3}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(0,201,177,.10), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(124,140,255,.08), transparent 40%),
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:auto,auto,42px 42px,42px 42px;
+    background-attachment:fixed;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif}
+  code, .mono{font-family:'JetBrains Mono',monospace}
 
-  nav{background:#161b22;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;border-bottom:1px solid #30363d}
-  .logo{color:#00c9b1;font-weight:700;font-size:1.1rem}
-  nav ul{display:flex;gap:1.5rem;list-style:none}
-  nav a{color:#8b949e;text-decoration:none;font-size:.9rem}
-  nav a:hover{color:#00c9b1}
+  nav{
+    background:rgba(10,14,20,.75);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
+    position:sticky;top:0;border-bottom:1px solid var(--border);z-index:100;
+  }
+  .logo{font-family:'Space Grotesk',sans-serif;color:var(--accent);font-weight:700;font-size:1.15rem;letter-spacing:.5px}
+  nav ul{display:flex;gap:2rem;list-style:none}
+  nav a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;position:relative}
+  nav a:hover{color:var(--text)}
+  nav a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav a:hover::after{width:100%}
 
-  section{padding:4rem 2rem;max-width:860px;margin:0 auto}
+  section{padding:5rem 2rem;max-width:900px;margin:0 auto}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
 
   /* HERO */
-  #hero{text-align:center;padding-top:5rem;padding-bottom:5rem}
-  #hero h1{font-size:2.5rem;font-weight:800;margin-bottom:.5rem}
-  #hero h1 span{color:#00c9b1}
-  #hero p.sub{color:#8b949e;margin-bottom:.5rem}
-  #hero p.loc{color:#8b949e;font-size:.9rem;margin-bottom:2rem}
-  .btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-  .btn{padding:.7rem 1.5rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:.9rem;transition:.2s}
-  .btn-p{background:#00c9b1;color:#0d1117}
-  .btn-p:hover{background:#00a896}
-  .btn-o{border:1.5px solid #00c9b1;color:#00c9b1}
-  .btn-o:hover{background:rgba(0,201,177,.1)}
+  #hero{text-align:center;padding-top:6rem;padding-bottom:5rem;max-width:900px}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);
+    background:var(--accent-dim);border:1px solid rgba(0,201,177,.3);
+    padding:.35rem .9rem;border-radius:999px;margin-bottom:1.6rem;
+  }
+  .hero-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  #hero h1{font-size:3rem;font-weight:700;margin-bottom:.6rem;letter-spacing:-1px}
+  #hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  #hero p.sub{color:var(--muted);font-size:1.15rem;margin-bottom:.4rem;font-weight:500}
+  #hero p.loc{color:var(--muted);font-size:.9rem;margin-bottom:2.2rem;font-family:'JetBrains Mono',monospace}
+  .btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+  .btn{padding:.75rem 1.6rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:.2s;display:inline-block;border:1.5px solid transparent;cursor:pointer}
+  .btn-p{background:var(--accent);color:#04120f}
+  .btn-p:hover{background:#00e2c4;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,201,177,.25)}
+  .btn-o{border:1.5px solid var(--border);color:var(--text);background:transparent}
+  .btn-o:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .hero-stack{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
 
   /* SOBRE */
-  #sobre{background:#161b22;border-radius:12px;padding:2rem;margin-top:1rem}
-  h2{font-size:1.3rem;margin-bottom:1rem;color:#00c9b1}
-  #sobre p{color:#8b949e;line-height:1.8;margin-bottom:.8rem}
+  #sobre{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2.2rem}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem;display:block}
+  h2{font-size:1.4rem;margin-bottom:1.1rem;font-weight:600}
+  #sobre p{color:var(--muted);line-height:1.85;margin-bottom:.9rem;font-size:.98rem}
+  #sobre p:last-child{margin-bottom:0}
+  #sobre strong{color:var(--text)}
 
   /* SKILLS */
-  .skill-list{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
-  .skill{background:#1c2836;border:1px solid #30363d;color:#e6edf3;padding:.4rem .9rem;border-radius:6px;font-size:.85rem}
+  .skill-list{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.2rem}
+  .skill{
+    background:var(--bg-soft);border:1px solid var(--border);color:var(--text);
+    padding:.5rem 1rem;border-radius:8px;font-size:.85rem;font-family:'JetBrains Mono',monospace;
+    transition:.2s;
+  }
+  .skill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 
   /* PROJETOS */
-  .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:1rem}
-  .proj{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:1.2rem}
-  .proj:hover{border-color:#00c9b1}
-  .proj h3{margin-bottom:.4rem;font-size:1rem}
-  .proj p{color:#8b949e;font-size:.85rem;line-height:1.6;margin-bottom:.8rem}
-  .proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
-  .ptag{background:rgba(0,201,177,.1);color:#00c9b1;padding:.15rem .55rem;border-radius:4px;font-size:.75rem}
-  .proj a{color:#00c9b1;font-size:.82rem;text-decoration:none}
-  .proj a:hover{text-decoration:underline}
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.1rem;margin-top:1.4rem}
+  .proj{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;
+    display:flex;flex-direction:column;transition:.25s;position:relative;overflow:hidden;
+  }
+  .proj::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+  .proj:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.35)}
+  .proj:hover::before{transform:scaleX(1)}
+  .proj-icon{font-size:1.4rem;margin-bottom:.6rem}
+  .proj h3{margin-bottom:.5rem;font-size:1.05rem;font-weight:600}
+  .proj p{color:var(--muted);font-size:.87rem;line-height:1.65;margin-bottom:1rem;flex-grow:1}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+  .ptag{background:var(--accent-dim);color:var(--accent);padding:.2rem .6rem;border-radius:5px;font-size:.72rem;font-family:'JetBrains Mono',monospace}
+  .proj a.link{color:var(--accent);font-size:.85rem;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:.3rem}
+  .proj a.link:hover{gap:.55rem}
 
   /* CONTACTO */
-  #contacto{background:#161b22;border-radius:12px;padding:2rem;margin-bottom:2rem}
-  .form-g{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem}
-  .form-g label{font-size:.85rem;color:#8b949e}
-  .form-g input,.form-g textarea{background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:.7rem;color:#e6edf3;font-size:.9rem;font-family:inherit;outline:none}
-  .form-g input:focus,.form-g textarea:focus{border-color:#00c9b1}
-  .form-g textarea{resize:vertical;min-height:100px}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  #contacto{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2.2rem;margin-bottom:3rem}
+  .form-g{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+  .form-g label{font-size:.85rem;color:var(--muted);font-weight:500}
+  .form-g input,.form-g textarea{
+    background:var(--bg-soft);border:1px solid var(--border);border-radius:8px;padding:.8rem;
+    color:var(--text);font-size:.9rem;font-family:inherit;outline:none;transition:.2s;
+  }
+  .form-g input:focus,.form-g textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+  .form-g textarea{resize:vertical;min-height:110px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:560px){.form-row{grid-template-columns:1fr}}
 
-  footer{text-align:center;padding:1.5rem;color:#8b949e;font-size:.85rem;border-top:1px solid #30363d}
-  footer span{color:#00c9b1}
+  footer{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+  footer span{color:var(--accent);font-weight:600}
+
+  @media(max-width:640px){
+    nav{padding:1rem 1.2rem}
+    nav ul{gap:1rem}
+    #hero h1{font-size:2.1rem}
+    section{padding:3.5rem 1.2rem}
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--accent);outline-offset:2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important}
+    html{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
@@ -75,6 +156,7 @@
 </nav>
 
 <section id="hero">
+  <div class="hero-tag"><span class="dot"></span>Disponível para novos projetos</div>
   <h1>Sabino <span>Chivinda</span></h1>
   <p class="sub">Desenvolvedor Frontend</p>
   <p class="loc">Angola</p>
@@ -82,20 +164,23 @@
     <a href="#projetos" class="btn btn-p">Ver Projetos</a>
     <a href="#contacto" class="btn btn-o">Contactar</a>
   </div>
+  <div class="hero-stack">
     <span class="skill">Node.js</span>
     <span class="skill">MySQL</span>
     <span class="skill">Python</span>
   </div>
 </section>
 
-<section id="sobre">
-  <h2>Sobre Mim</h2>
-  <p>Olá! Sou o <strong>Sabino Chivinda</strong>,desenvolvedor Frontend baseado em Angola, apaixonado por criar interfaces web modernas, responsivas e funcionais.</p>
+<section id="sobre" class="reveal">
+  <span class="eyebrow">Sobre</span>
+  <h2>Quem sou eu</h2>
+  <p>Olá! Sou o <strong>Sabino Chivinda</strong>, desenvolvedor Frontend baseado em Angola, apaixonado por criar interfaces web modernas, responsivas e funcionais.</p>
   <p>Estou em constante evolução na área da tecnologia, com foco em JavaScript, TypeScript e Angular, buscando sempre desenvolver soluções intuitivas e com boa experiência para o utilizador.</p>
   <p>Tenho grande interesse em crescer como desenvolvedor Full Stack, ampliando os meus conhecimentos tanto no Frontend quanto no Backend para construir aplicações completas e profissionais.</p>
 </section>
 
-<section id="skills">
+<section id="skills" class="reveal">
+  <span class="eyebrow">Stack</span>
   <h2>Skills</h2>
   <div class="skill-list">
     <span class="skill">HTML5</span>
@@ -103,67 +188,108 @@
     <span class="skill">JavaScript</span>
     <span class="skill">TypeScript</span>
     <span class="skill">Angular</span>
+    <span class="skill">Node.js</span>
+    <span class="skill">Express</span>
+    <span class="skill">PostgreSQL</span>
+    <span class="skill">MySQL</span>
+    <span class="skill">JWT</span>
+    <span class="skill">Python</span>
+  </div>
 </section>
 
-<section id="projetos">
+<section id="projetos" class="reveal">
+  <span class="eyebrow">Trabalho</span>
   <h2>Projetos</h2>
   <div class="proj-grid">
+
     <div class="proj">
-      <h3>🧘 Still Mind</h3>
+      <h3>Sistema de Convites com QR Code</h3>
+      <div class="proj-tags">
+        <span class="ptag">Angular</span><span class="ptag">Node.js</span><span class="ptag">PostgreSQL</span><span class="ptag">JWT</span>
+      </div>
+      <p>Plataforma completa para criação e validação de convites digitais com QR Code único, login de organizadores, painel administrativo e temas de convite (Padrão e Festa Infantil).</p>
+      <a class="link" href="https://convite-edhr.vercel.app/" target="_blank">Ver projeto →</a>
+    </div>
+
+    <div class="proj">
+      <h3>Still Mind</h3>
       <div class="proj-tags">
         <span class="ptag">JS</span><span class="ptag">Node.js</span><span class="ptag">MySQL</span>
       </div>
       <p>App de saúde mental com diário emocional, chat com IA e técnicas de respiração.</p>
-      <a href="https://still-mind-complete.onrender.com" target="_blank">Ver projeto →</a>
+      <a class="link" href="https://still-mind-complete.onrender.com" target="_blank">Ver projeto →</a>
     </div>
+
     <div class="proj">
-      <h3>🤖 J.A.R.V.I.S.</h3>
+      <h3>J.A.R.V.I.S.</h3>
       <div class="proj-tags">
         <span class="ptag">Python</span><span class="ptag">Voz IA</span>
       </div>
       <p>Assistente de voz pessoal em Português com reconhecimento de comandos.</p>
-      <a href="#">Ver projeto →</a>
+      <a class="link" href="#">Ver projeto →</a>
     </div>
+
     <div class="proj">
-      <h3>🏢 Nexus Studio</h3>
+      <h3>Nexus Studio</h3>
       <div class="proj-tags">
         <span class="ptag">Node.js</span><span class="ptag">Express</span><span class="ptag">JWT</span>
       </div>
       <p>Plataforma Full Stack com API REST e autenticação segura.</p>
-      <a href="#">Ver projeto →</a>
+      <a class="link" href="#">Ver projeto →</a>
     </div>
+
+    <div class="proj">
+      <h3>Nassu Tec</h3>
+      <div class="proj-tags">
+        <span class="ptag">JS</span><span class="ptag">Node.js</span>
+      </div>
+      <p>Página web institucional de uma empresa de prestação de serviços.</p>
+      <a class="link" href="#">Ver projeto →</a>
+    </div>
+
   </div>
 </section>
 
-<section id="contacto">
-  <h2>Contacto</h2>
+<section id="contacto" class="reveal">
+  <span class="eyebrow">Contacto</span>
+  <h2>Vamos falar</h2>
   <div class="form-row">
     <div class="form-g">
       <label>Nome</label>
-      <input type="text" placeholder="O teu nome"/>
+      <input type="text" id="c-nome" placeholder="O teu nome"/>
     </div>
     <div class="form-g">
       <label>Email</label>
-      <input type="email" placeholder="teu@email.com"/>
+      <input type="email" id="c-email" placeholder="teu@email.com"/>
     </div>
   </div>
   <div class="form-g">
     <label>Mensagem</label>
-    <textarea placeholder="Escreve aqui..."></textarea>
+    <textarea id="c-msg" placeholder="Escreve aqui..."></textarea>
   </div>
-  <button class="btn btn-p"
-onclick="window.open('https://api.whatsapp.com/send/?phone=244974519908&text=Ol%C3%A1+Sabino%2C+vi+o+teu+portf%C3%B3lio&type=phone_number&app_absent=0', '_blank')">
-  Enviar 
-</button>
+  <button class="btn btn-p" onclick="enviar(this)">Enviar</button>
 </section>
 
-<footer>© 2026 <span>Sabino Chivinda</span> — Angola 🇦🇴</footer>
+<footer>© 2026 <span>Sabino Chivinda</span> — Angola</footer>
 
 <script>
   function enviar(btn){
-    btn.textContent='✅ Enviado!';
-    setTimeout(()=>btn.textContent='Enviar 🚀',2500);
+    var nome = document.getElementById('c-nome').value.trim();
+    var msg = document.getElementById('c-msg').value.trim();
+    var texto = 'Olá Sabino, sou ' + (nome || 'um visitante do teu portfólio') + '.' + (msg ? ' ' + msg : ' Vi o teu portfólio e gostaria de falar contigo.');
+    window.open('https://api.whatsapp.com/send/?phone=244974519908&text=' + encodeURIComponent(texto) + '&type=phone_number&app_absent=0', '_blank');
+    btn.textContent = 'Enviado!';
+    setTimeout(function(){ btn.textContent = 'Enviar'; }, 2500);
   }
+
+  // Scroll reveal
+  var reveals = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15});
+  reveals.forEach(function(el){ io.observe(el); });
 </script>
 
 </body>
